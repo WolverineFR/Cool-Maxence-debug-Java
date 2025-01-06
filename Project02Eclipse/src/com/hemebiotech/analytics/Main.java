@@ -1,21 +1,28 @@
 package com.hemebiotech.analytics;
 
 import java.util.List;
-
-//import com.hemebiotech.analytics.*;
+import java.util.Map;
 
 public class Main {
 
 	public static void main(String args[]) {
 
-		ReadSymptomDataFromFile readSymptom = new ReadSymptomDataFromFile("../Project02Eclipse/symptoms.txt");
-		//WriteSymptomDataToFile writeSymptom = new WriteSymptomDataToFile();
-		
-		List<String>symptoms = readSymptom.GetSymptoms();
-		if (symptoms != null) {
-			System.out.println(symptoms);
-		}
-		
+		String filepath = ("../Project02Eclipse/symptoms.txt");
+
+		ReadSymptomDataFromFile readSymptom = new ReadSymptomDataFromFile(filepath);
+		WriteSymptomDataToFile writeSymptom = new WriteSymptomDataToFile();
+		AnalyticsCounter counter = new AnalyticsCounter(readSymptom, writeSymptom);
+
+		List<String> symptoms = readSymptom.GetSymptoms();
+
+		Map<String, Integer> symptomCounts = counter.countSymptoms(symptoms);
+
+		Map<String, Integer> sortedSymptoms = counter.sortSymptoms(symptomCounts);
+
+		counter.writeSymptoms(sortedSymptoms);
+
+
+
 	}
-	
+
 }
