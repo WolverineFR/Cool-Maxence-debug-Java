@@ -8,14 +8,13 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
 
 	@Override
 	public void writeSymptoms(Map<String, Integer> symptoms) {
-
-		try (FileWriter writer = new FileWriter("result.out")) {
+		try (FileWriter writer = new FileWriter("../Project02Eclipse/result.out")) {
 			for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
 				String symptom = entry.getKey();
 				int count = entry.getValue();
 				writer.write(symptom + ": " + count + "\n");
 			}
-			System.out.println("Symptômes écrits dans le fichier : ");
+			System.out.println("Symptoms written successfully to result.out");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
